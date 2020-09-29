@@ -1,24 +1,11 @@
 package com.demo.dto;
 
-public class Meta {
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+public class Meta {
     private String sent;
     private Object summary;
-
-    public String getSent() {
-        return sent;
-    }
-
-    public void setSent(String sent) {
-        this.sent = sent;
-    }
-
-    public Object getSummary() {
-        return summary;
-    }
-
-    public void setSummary(Object summary) {
-        this.summary = summary;
-    }
-
 }
