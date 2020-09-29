@@ -1,7 +1,6 @@
 package com.demo.controller;
 
 import com.demo.dto.RuleAddRequest;
-import com.demo.entity.TweetEntity;
 import com.demo.entity.TweetView;
 import com.demo.service.ITweetService;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBo
 import javax.servlet.http.HttpServletResponse;
 import java.net.URISyntaxException;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class TweetController {
 
@@ -25,11 +25,6 @@ public class TweetController {
 
     @Autowired
     private ITweetService tweetService;
-
-//    @GetMapping("rules")
-//    public Object rules() {
-//        return tweetService.getRules();
-//    }
 
     @PostMapping("rules")
     public Object addRules(@RequestBody RuleAddRequest ruleDto) {
@@ -42,12 +37,12 @@ public class TweetController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "stream", produces = MediaType.APPLICATION_JSON_VALUE)
+//    @GetMapping(value = "stream", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StreamingResponseBody> stream(final HttpServletResponse response) {
         response.setContentType("application/json");
         StreamingResponseBody stream = outputStream -> {
             try {
-                tweetService.stream(outputStream);
+                tweetService.stream();
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -62,6 +57,11 @@ public class TweetController {
     @GetMapping("history")
     public Page<TweetView> tweets(@RequestParam Short page) {
         return tweetService.getOldTweets(page);
+    }
+
+    @GetMapping("live")
+    public TweetView liveTweet() {
+        return tweetService.getLatestTweet();
     }
 
 }

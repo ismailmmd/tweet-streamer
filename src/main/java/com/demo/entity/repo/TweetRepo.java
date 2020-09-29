@@ -9,5 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TweetRepo extends PagingAndSortingRepository<TweetEntity, Long> {
-    Page<TweetView> findAllProjectedBy(Pageable pageable);
+    Page<TweetView> findAllProjectedByOrderByDateTimeDesc(Pageable pageable);
+    TweetView findFirstProjectedByOrderByDateTimeDesc();
 }
