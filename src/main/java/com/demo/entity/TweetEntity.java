@@ -1,5 +1,6 @@
 package com.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,7 @@ public class TweetEntity {
     private Long id;
     @Lob
     private String data;
+    @JsonIgnore
     private LocalDateTime dateTime;
 
     public TweetEntity(String tweet, LocalDateTime localDateTime) {

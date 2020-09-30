@@ -116,8 +116,8 @@ public class TweetService implements ITweetService {
     }
 
     @Override
-    public TweetView getLatestTweet() {
-        return tweetRepo.findFirstProjectedByOrderByDateTimeDesc();
+    public TweetEntity getLatestTweet() {
+        return tweetRepo.findFirstByOrderByDateTimeDesc();
     }
 
     private RuleObject getRules() {
