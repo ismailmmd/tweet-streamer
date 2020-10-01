@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ismail5701/tweet-streamer.svg?branch=master)](https://travis-ci.org/ismail5701/tweet-streamer) [![codecov](https://codecov.io/gh/ismail5701/tweet-streamer/branch/master/graph/badge.svg)](https://codecov.io/gh/ismail5701/tweet-streamer)
 
-<p align="center">
+<p>
 	<a alt="GitHub repo size">
         <img src="https://img.shields.io/github/repo-size/ismail5701/tweet-streamer" />
     </a>    
