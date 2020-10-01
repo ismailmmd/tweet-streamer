@@ -4,7 +4,6 @@ import com.demo.dto.*;
 import com.demo.entity.TweetEntity;
 import com.demo.entity.TweetView;
 import com.demo.entity.repo.TweetRepo;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.CookieSpecs;
@@ -45,14 +44,11 @@ public class TweetService implements ITweetService {
     @Autowired
     RestTemplate restTemplate;
     @Autowired
-    ObjectMapper mapper;
-    @Autowired
     TweetRepo tweetRepo;
 
     @Override
     public Object resetRule(RuleAddRequest ruleDto) {
         removeRules();
-        tweetRepo.deleteAll();
         final String uri = baseUri + RULES;
         HttpEntity<Object> entity = new HttpEntity<>(ruleDto);
         ResponseEntity<Object> response = restTemplate.postForEntity(uri, entity, Object.class);
@@ -116,8 +112,8 @@ public class TweetService implements ITweetService {
     }
 
     @Override
-    public TweetEntity getLatestTweet() {
-        return tweetRepo.findFirstByOrderByDateTimeDesc();
+    public List<TweetEntity> getLatestTweet() {
+        return tweetRepo.findTop20ByOrderByDateTimeDesc();
     }
 
     private RuleObject getRules() {

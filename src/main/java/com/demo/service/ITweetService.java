@@ -7,11 +7,12 @@ import org.springframework.data.domain.Page;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 public interface ITweetService {
     Object resetRule(RuleAddRequest ruleDtos);
     void removeRules();
     void stream() throws URISyntaxException, IOException;
     Page<TweetView> getOldTweets(Short page);
-    TweetEntity getLatestTweet();
+    List<TweetEntity> getLatestTweet();
 }
