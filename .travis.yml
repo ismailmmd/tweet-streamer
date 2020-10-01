@@ -1,7 +1,9 @@
 language: java
 jdk:
-  - oraclejdk11
   - openjdk11
+branches:
+  only:
+  - master
 before_install:
   - chmod +x mvnw
 after_success:
