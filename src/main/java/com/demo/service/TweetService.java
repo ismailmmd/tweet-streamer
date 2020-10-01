@@ -60,7 +60,7 @@ public class TweetService implements ITweetService {
     public void removeRules() {
         tweetRepo.deleteAll();
         RuleObject rules = getRules();
-        if (rules.getData() == null || rules.getData().isEmpty())
+        if (rules == null || rules.getData() == null || rules.getData().isEmpty())
             return;
         List<String> ruleIds = rules
                 .getData()
