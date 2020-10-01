@@ -4,19 +4,17 @@ import com.demo.dto.RuleAddRequest;
 import com.demo.entity.TweetEntity;
 import com.demo.entity.TweetView;
 import com.demo.service.ITweetService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class TweetController {
-
-    private static final Logger log = LoggerFactory.getLogger(TweetController.class);
 
     @Autowired
     private ITweetService tweetService;
@@ -38,7 +36,7 @@ public class TweetController {
     }
 
     @GetMapping("live")
-    public TweetEntity liveTweet() {
+    public List<TweetEntity> liveTweet() {
         return tweetService.getLatestTweet();
     }
 
