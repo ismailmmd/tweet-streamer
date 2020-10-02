@@ -19,22 +19,40 @@ public class TweetController {
     @Autowired
     private ITweetService tweetService;
 
+    /**
+     * Endpoint for resetting rules
+     * @param ruleDto
+     * @return
+     */
     @PostMapping("rules")
     public Object addRules(@RequestBody RuleAddRequest ruleDto) {
         return tweetService.resetRule(ruleDto);
     }
 
+    /**
+     * Endpoint for removing all rules
+     * @return
+     */
     @DeleteMapping("rules")
     public ResponseEntity<Object> removeRules(){
         tweetService.removeRules();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    /**
+     * Endpoint to fetch older tweets
+     * @param page
+     * @return
+     */
     @GetMapping("history")
     public Page<TweetView> tweets(@RequestParam Short page) {
         return tweetService.getOldTweets(page);
     }
 
+    /**
+     * Endpoint to fetch live tweets
+     * @return
+     */
     @GetMapping("live")
     public List<TweetEntity> liveTweet() {
         return tweetService.getLatestTweet();

@@ -11,13 +11,14 @@
     </a>
 </p>
 
-A spring boot application to stream live tweets from Twitter Stream APIs. User sets the rule by which tweets are filtered.
+A spring boot application to stream live tweets from Twitter Stream APIs. User can set the rule by which tweets are filtered.
      
 ## Application screenshots
 
-<img src="images\home.PNG"/>
+<img src="docs\history.PNG"/>
+<img src="docs\live.PNG"/>
 
-## Tech stack & Open-source libraries
+## The tech stack & Open-source libraries
 
 ### Data
 
@@ -59,6 +60,7 @@ mvn test
 
 * 	Download the zip or clone the Git repository.
 * 	Unzip the zip file (if you downloaded one)
+*   Replace the Twitter API Key in `application.properties` file `twitter.config.token=<your API key>`
 *   Build the project using below command
 ```shell
 mvn clean install
@@ -86,6 +88,10 @@ mvn spring-boot:run
 ```shell
 mvn javadoc:javadoc
 ```
+
+* 	Postmnan collection for APIs included in `/docs` folder
+*   [Importing Collection to Postman](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/)
+
 
 ## Files and Directories Structure
 

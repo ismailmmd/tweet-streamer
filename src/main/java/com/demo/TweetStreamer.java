@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 public class TweetStreamer {
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		ApplicationContext context = SpringApplication.run(TweetStreamer.class, args);
-//		Calling Twitter streaming API
+//		Initialising streaming
 		context.getBean(ITweetService.class).stream();
 	}
 }
