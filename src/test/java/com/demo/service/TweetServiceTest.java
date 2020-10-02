@@ -2,9 +2,13 @@ package com.demo.service;
 
 import com.demo.dto.RuleAddRequest;
 import com.demo.dto.RuleObject;
+import com.demo.entity.TweetEntity;
 import com.demo.entity.repo.TweetRepo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.*;
+import org.apache.http.client.HttpClient;
+import org.apache.http.params.HttpParams;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,8 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URISyntaxException;
+import java.util.Locale;
 
 import static org.mockito.Mockito.*;
 
@@ -27,7 +32,9 @@ class TweetServiceTest {
     @InjectMocks
     TweetService tweetService;
     @Mock
-    private RestTemplate restTemplate;
+    RestTemplate restTemplate;
+    @Mock
+    HttpClient httpClient;
 
     @Test
     void resetRule_noExistingRules() {
@@ -51,7 +58,15 @@ class TweetServiceTest {
 
     @Test
     void stream() throws IOException, URISyntaxException {
-//        tweetService.stream();
+        String testData = "test data";
+        HttpResponse httpResponse = mock(HttpResponse.class);
+        HttpEntity httpEntity = mock(HttpEntity.class);
+        InputStream inputStream = new ByteArrayInputStream(testData.getBytes());
+        when(httpEntity.getContent()).thenReturn(inputStream);
+        when(httpResponse.getEntity()).thenReturn(httpEntity);
+        when(httpClient.execute(any())).thenReturn(httpResponse);
+        tweetService.stream();
+        verify(tweetRepo, times(1)).save(new TweetEntity(testData, any()));
     }
 
     @Test
