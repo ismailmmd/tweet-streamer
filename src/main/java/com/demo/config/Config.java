@@ -1,6 +1,10 @@
 package com.demo.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.CookieSpecs;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +23,14 @@ public class Config {
             request.getHeaders().add("Authorization", "Bearer "+token);
             return execution.execute(request, body);
         })).build();
+    }
+
+    @Bean
+    public HttpClient httpClient() {
+        return HttpClients.custom()
+                .setDefaultRequestConfig(RequestConfig.custom()
+                        .setCookieSpec(CookieSpecs.STANDARD).build())
+                .build();
     }
 
     @Bean

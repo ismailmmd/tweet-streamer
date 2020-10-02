@@ -16,5 +16,5 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RuleDeleteRequest {
-    List<String> ids;
+    private List<String> ids;
 }

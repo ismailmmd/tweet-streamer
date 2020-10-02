@@ -6,11 +6,8 @@ import com.demo.entity.TweetView;
 import com.demo.entity.repo.TweetRepo;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.config.CookieSpecs;
-import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +39,11 @@ public class TweetService implements ITweetService {
     private String token;
 
     @Autowired
-    RestTemplate restTemplate;
+    private RestTemplate restTemplate;
     @Autowired
-    TweetRepo tweetRepo;
+    private TweetRepo tweetRepo;
+    @Autowired
+    private HttpClient httpClient;
 
     @Override
     public Object resetRule(RuleAddRequest ruleDto) {
@@ -70,17 +69,13 @@ public class TweetService implements ITweetService {
         final String uri = baseUri + RULES;
         HttpEntity<Object> entity = new HttpEntity<>(new RuleDeleteRequest(ruleIds));
         ResponseEntity<Object> response = restTemplate.postForEntity(uri, entity, Object.class);
+        tweetRepo.deleteAll();
         log.info("Remove Rules : Result - status ( {} ) has body: {}", response.getStatusCode(), response.hasBody());
     }
 
     @Async
     @Override
     public void stream() throws URISyntaxException, IOException {
-        HttpClient httpClient = HttpClients.custom()
-                .setDefaultRequestConfig(RequestConfig.custom()
-                        .setCookieSpec(CookieSpecs.STANDARD).build())
-                .build();
-
         URIBuilder uriBuilder = new URIBuilder(baseUri + "?tweet.fields=created_at&expansions=author_id");
 
         HttpGet httpGet = new HttpGet(uriBuilder.build());
@@ -92,11 +87,10 @@ public class TweetService implements ITweetService {
             try (InputStreamReader inputStreamReader = new InputStreamReader((entity.getContent()));
                  BufferedReader reader = new BufferedReader(inputStreamReader)) {
                 String line = reader.readLine();
-                saveTweet(line);
                 while (line != null) {
                     log.info("steaming out {}", line);
-                    line = reader.readLine();
                     saveTweet(line);
+                    line = reader.readLine();
                 }
             } catch (Exception exception) {
                 log.error("Exception occurred during streaming {}", exception.getMessage());

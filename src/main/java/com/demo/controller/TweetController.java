@@ -21,8 +21,10 @@ public class TweetController {
 
     /**
      * Endpoint for resetting rules
-     * @param ruleDto
-     * @return
+     *
+     * @param ruleDto: Add request object
+     * @see RuleAddRequest
+     * @return Object: Twitter object for adding rules
      */
     @PostMapping("rules")
     public Object addRules(@RequestBody RuleAddRequest ruleDto) {
@@ -31,18 +33,20 @@ public class TweetController {
 
     /**
      * Endpoint for removing all rules
-     * @return
+     *
+     * @return ResponseEntity<Object>: Twitter object after removing existing rules
      */
     @DeleteMapping("rules")
-    public ResponseEntity<Object> removeRules(){
+    public ResponseEntity<Object> removeRules() {
         tweetService.removeRules();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     /**
-     * Endpoint to fetch older tweets
-     * @param page
-     * @return
+     * Endpoint for fetching older tweets
+     *
+     * @param page: Pagination page size
+     * @return Page<TweetView>
      */
     @GetMapping("history")
     public Page<TweetView> tweets(@RequestParam Short page) {
@@ -50,8 +54,9 @@ public class TweetController {
     }
 
     /**
-     * Endpoint to fetch live tweets
-     * @return
+     * Endpoint for fetching live tweets
+     *
+     * @return List<TweetEntity>
      */
     @GetMapping("live")
     public List<TweetEntity> liveTweet() {
