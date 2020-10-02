@@ -7,7 +7,7 @@
         <img src="https://img.shields.io/github/repo-size/ismail5701/tweet-streamer" />
     </a>    
     <a alt="Java">
-        <img src="https://img.shields.io/badge/Java%20Version-v11-blue" />
+        <img src="https://img.shields.io/badge/Java%20Version-v1.8-blue" />
     </a>
 </p>
 
