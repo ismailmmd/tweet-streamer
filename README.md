@@ -11,7 +11,7 @@
     </a>
 </p>
 
-description goes here
+A spring boot application to stream live tweets from Twitter Stream APIs. User sets the rule by which tweets are filtered.
      
 ## Application screenshots
 
@@ -69,19 +69,8 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-## Explore Rest APIs
-
-The app defines following CRUD APIs.
-
-### URLs
-
-|                  URL                   | Method |          Remarks       |
-|----------------------------------------|--------|------------------------|
-|`http://localhost:8080/`                | GET    | Home Page              |
-
 ## Sample Valid JSON Request Bodys
 
-##### Create Person -> /api/person
 
 ```json
 {
@@ -101,6 +90,82 @@ mvn javadoc:javadoc
 ## Files and Directories Structure
 
 ```text
-.
-├── S
+│   .gitignore
+│   .travis.yml
+│   mvnw
+│   mvnw.cmd
+│   pom.xml
+│   README.md
+│   tweet-streamer.iml
+│
+├───.mvn
+│   └───wrapper
+│           maven-wrapper.jar
+│           maven-wrapper.properties
+│           MavenWrapperDownloader.java
+│
+├───src
+│   ├───main
+│   │   ├───java
+│   │   │   └───com
+│   │   │       └───demo
+│   │   │           │   TweetStreamer.java
+│   │   │           │
+│   │   │           ├───config
+│   │   │           │       AsyncConfiguration.java
+│   │   │           │       Config.java
+│   │   │           │
+│   │   │           ├───controller
+│   │   │           │       TweetController.java
+│   │   │           │
+│   │   │           ├───dto
+│   │   │           │       Datum.java
+│   │   │           │       RuleAddRequest.java
+│   │   │           │       RuleDeleteRequest.java
+│   │   │           │       RuleObject.java
+│   │   │           │
+│   │   │           ├───entity
+│   │   │           │   │   TweetEntity.java
+│   │   │           │   │   TweetView.java
+│   │   │           │   │
+│   │   │           │   └───repo
+│   │   │           │           TweetRepo.java
+│   │   │           │
+│   │   │           └───service
+│   │   │                   ITweetService.java
+│   │   │                   TweetService.java
+│   │   │
+│   │   └───resources
+│   │       │   application.properties
+│   │       │
+│   │       └───static
+│   │               3rdpartylicenses.txt
+│   │               favicon.ico
+│   │               index.html
+│   │               main.99369130811ab3e1a6fa.js
+│   │               polyfills.35a5ca1855eb057f016a.js
+│   │               runtime.acf0dec4155e77772545.js
+│   │               styles.7a56496004aef477cd49.css
+│   │
+│   └───test
+│       └───java
+│           └───com
+│               └───demo
+│                   │   TweetStreamerTest.java
+│                   │
+│                   ├───controller
+│                   │       TweetControllerTest.java
+│                   │
+│                   ├───dto
+│                   │       DatumTest.java
+│                   │       RuleDeleteRequestTest.java
+│                   │
+│                   ├───entity
+│                   │       TweetEntityTest.java
+│                   │
+│                   └───service
+│                           TweetServiceTest.java
 ```
+## Reference
+
+[Twitter Stream API](https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/quick-start) - Twitter Documentation
