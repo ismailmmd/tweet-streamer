@@ -11,7 +11,10 @@
     </a>
 </p>
 
-A spring boot application to stream live tweets from Twitter Stream APIs. User can set the rule by which tweets are filtered.
+A spring boot application to stream live tweets from Twitter Stream APIs. User interface allows user to Add rules based on Follower/Track and Reset the App without restart.
+
+*   User can view live feeds in - Live Tab
+*   User can view historical tweets in - History Tab
      
 ## Application screenshots
 
@@ -56,7 +59,7 @@ A spring boot application to stream live tweets from Twitter Stream APIs. User c
 mvn test
 ```
 
-## Running the application locally
+## Running the application locally / Deploying
 
 * 	Download the zip or clone the Git repository.
 * 	Unzip the zip file (if you downloaded one)
@@ -71,7 +74,11 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-## Sample Valid JSON Request Bodys
+## Fornt End Angular Project Repository
+
+* [NgTweetStreamer](https://github.com/ismail5701/ng-tweet-streamer)
+
+## Sample Valid JSON Response
 
 
 ```json
@@ -89,7 +96,7 @@ mvn spring-boot:run
 mvn javadoc:javadoc
 ```
 
-* 	Postmnan collection for APIs included in `/docs` folder
+* 	Postman collection for APIs included in `/docs` folder
 *   [Importing Collection to Postman](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/)
 
 
