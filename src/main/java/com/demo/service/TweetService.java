@@ -24,6 +24,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,6 +70,12 @@ public class TweetService implements ITweetService {
         final String uri = baseUri + RULES;
         HttpEntity<Object> entity = new HttpEntity<>(new RuleDeleteRequest(ruleIds));
         ResponseEntity<Object> response = restTemplate.postForEntity(uri, entity, Object.class);
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            log.warn("Interrupted!", e);
+            Thread.currentThread().interrupt();
+        }
         tweetRepo.deleteAll();
         log.info("Remove Rules : Result - status ( {} ) has body: {}", response.getStatusCode(), response.hasBody());
     }
